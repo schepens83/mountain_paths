@@ -17,6 +17,7 @@ File.open("./Colorado_480x480.dat", "r") do |f|
 end
 
 
+
 p max_val = a.max_by{|k,v| v}[1].to_f
 p min_val = a.min_by{|k,v| v}[1].to_f
 
