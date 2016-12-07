@@ -4,5 +4,7 @@ http://nifty.stanford.edu/2016/franke-mountain-paths/
 
 Problem decomposition:
 - I/O of file to 2D array
+	- use hash? 
 - algorithm to find best path
 - Visualize path (output graph to picture file)
+	- chunky_png -> works
