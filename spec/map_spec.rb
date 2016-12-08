@@ -24,4 +24,49 @@ describe Map do
 
 		end
   end
+
+	describe ".nr_rows" do
+		before do 
+			@map = Map.new
+			@map.read_file("./spec/map_spec_data")
+		end
+
+		it "returns the correct number of rows" do
+			expect(@map.nr_rows).to eql 2
+		end
+	end
+
+	describe ".nr_columns" do
+		before do 
+			@map = Map.new
+			@map.read_file("./spec/map_spec_data")
+		end
+
+		it "returns the correct number of columns" do
+			expect(@map.nr_columns).to eql 3
+		end
+	end
+
+	describe ".max_height" do
+		before do 
+			@map = Map.new
+			@map.read_file("./spec/map_spec_data")
+		end
+
+		it "returns the max height" do
+			expect(@map.max_height).to eql 6.0
+		end
+	end
+
+	describe ".nr_columns" do
+		before do 
+			@map = Map.new
+			@map.read_file("./spec/map_spec_data")
+		end
+
+		it "returns the minimum height" do
+			expect(@map.min_height).to eql 1.0
+		end
+	end
+
 end

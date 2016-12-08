@@ -31,7 +31,7 @@ png = ChunkyPNG::Image.new(480, 480, ChunkyPNG::Color::TRANSPARENT)
 
 480.times do |n|
 	480.times do |m|
-		teint = normalize( min_val, max_val, a[[n+1,m+1]].to_f ) * 255
+		teint = normalize( min_val, max_val, a[[n+1,m+1]].to_f ) * 255 
 		png[n,m] = ChunkyPNG::Color.grayscale(teint.to_i)
 		# png[n,m] = ChunkyPNG::Color.rgba(n*10, m*10, 30, 128)
 	end
