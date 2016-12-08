@@ -29,19 +29,19 @@ class Map
 	end
 
 	def nr_rows
-		@grid.max_by { |k,v| k[0] }[0][0].to_i
+		@nr_rows ||= @grid.max_by { |k,v| k[0] }[0][0].to_i
 	end
 
 	def nr_columns
-		@grid.max_by { |k,v| k[1] }[0][1].to_i
+		@nr_columns ||= @grid.max_by { |k,v| k[1] }[0][1].to_i
 	end
 
 	def max_height
-		@grid.max_by{|k,v| v}[1].to_f		
+		@max_height ||= @grid.max_by{|k,v| v}[1].to_f		
 	end
 
 	def min_height
-		@grid.min_by{|k,v| v}[1].to_f		
+		@min_height ||= @grid.min_by{|k,v| v}[1].to_f		
 	end
 
 	private
