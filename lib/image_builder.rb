@@ -15,13 +15,14 @@ class ImageBuilder
 
 
 	def build_image
-		@map.nr_columns.times do |col|
-			@map.nr_rows.times do |row|
-				teint = normalize( @map.min_height, @map.max_height, @map.grid[[ col+1,row+1 ]].to_f ) * 255 
-				@image[ col,row ] = ChunkyPNG::Color.grayscale(teint.to_i)
+		@map.nr_rows.times do |row|
+			@map.nr_columns.times do |col|
+				teint = (normalize( @map.min_height, @map.max_height, @map.grid[[ row + 1,col + 1 ]].to_f ) * 255).to_i
+				# @image[ col,row ] = ChunkyPNG::Color.grayscale_alpha(teint, 2)
+				@image[ col,row ] = ChunkyPNG::Color.grayscale(teint)
+				p ((teint.to_f / 255) * 100).to_i
 			end
 		end
-		p @image
 	end
 
 	def save_image(filename)
@@ -41,6 +42,7 @@ class ImageBuilder
 end
 
 mp = Map.new
+# mp.read_file("./Colorado_480x480.dat")
 mp.read_file("./spec/map_spec_data")
 ib = ImageBuilder.new(mp)
 ib.build_image
