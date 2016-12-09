@@ -68,5 +68,3 @@ class Map
 		str.split(" ").length > 1
 	end
 end
-
-# "./Colorado_480x480.dat"
