@@ -22,12 +22,25 @@ class ImageBuilder
 	end
 
 	def draw_route(route)
-		route.each do |e|  
-			col = e[1]
-			row = e[0]
-			@image[ col - 1,row - 1 ] = ChunkyPNG::Color.rgba(255, 0, 0, 128)	
-		end
+		if block_given?  
+			
+			route.each do |e|  
+				col = e[1]
+				row = e[0]
+				@image[ col - 1,row - 1 ] = ChunkyPNG::Color.rgba(255, 0, 0, 128)
+				
+				yield
+			end
+			
+		else  
 
+			route.each do |e|  
+				col = e[1]
+				row = e[0]
+				@image[ col - 1,row - 1 ] = ChunkyPNG::Color.rgba(255, 0, 0, 128)
+			end
+
+		end  
 	end
 
 	def save_image(filename)
