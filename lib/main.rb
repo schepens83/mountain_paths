@@ -8,7 +8,7 @@ mp.read_file("./data/testMountains.dat")
 # mp.read_file("./spec/map_spec_data")
 
 
-	rp = RoutePicker.new(mp, [4,1])
+	rp = RoutePicker.new(mp, [2,1])
 
 
 # ib = ImageBuilder.new(mp)
