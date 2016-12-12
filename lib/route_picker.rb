@@ -4,7 +4,8 @@ class RoutePicker
 	def initialize(map, init_loc)
 		@map = map
 		@route = Hash.new
-		@path = pick_route(init_loc)
+		@path = Array.new
+		p @path = pick_route(init_loc)
 	end
 
 	# create the route from left to right. coordinates in [y, x] format.
@@ -16,7 +17,7 @@ class RoutePicker
 
 		while not at_right_side?(cl)
 			cl = next_step(cl)
-			@path << cl
+			path << cl
 			p "---------"
 		end 
 
