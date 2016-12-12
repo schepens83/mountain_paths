@@ -13,6 +13,7 @@ class Map
 			
 			File.open(path, "r") do |f|
 				f.each_line do |line|
+					p line
 					line.split(" ").map { |s| s.to_i }.each do |val|
 						@grid[[n,m]] = val
 						m = m + 1

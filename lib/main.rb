@@ -4,11 +4,11 @@ require_relative "route_picker"
 
 mp = Map.new
 # mp.read_file("./data/Colorado_480x480.dat")
-# mp.read_file("./data/testMountains.dat")
-mp.read_file("./spec/map_spec_data")
+mp.read_file("./data/testMountains.dat")
+# mp.read_file("./spec/map_spec_data")
 
 
-rp = RoutePicker.new(mp)
+	rp = RoutePicker.new(mp, [4,1])
 
 
 # ib = ImageBuilder.new(mp)
