@@ -5,7 +5,7 @@ class ImageBuilder
 
 	def initialize(map)
 		@map = map
-		p @image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
+		@image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
 
 	end
 
