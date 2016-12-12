@@ -5,12 +5,12 @@ class ImageBuilder
 
 	def initialize(map)
 		@map = map
-		@image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
+		p @image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
 
 	end
 
 
-	def build_image
+	def draw_map
 		@map.nr_rows.times do |row|
 			@map.nr_columns.times do |col|
 				teint = (normalize( @map.min_height, @map.max_height, @map.grid[[ row + 1,col + 1 ]].to_f ) * 255).to_i
@@ -19,6 +19,15 @@ class ImageBuilder
 				((teint.to_f / 255) * 100).to_i
 			end
 		end
+	end
+
+	def draw_route(route)
+		route.each do |e|  
+			col = e[1]
+			row = e[0]
+			@image[ col - 1,row - 1 ] = ChunkyPNG::Color.rgba(255, 0, 0, 128)	
+		end
+
 	end
 
 	def save_image(filename)

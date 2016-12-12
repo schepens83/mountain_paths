@@ -2,18 +2,20 @@ require_relative "map"
 require_relative "image_builder"
 require_relative "route_picker"
 
-mp = Map.new
-# mp.read_file("./data/Colorado_480x480.dat")
-mp.read_file("./data/testMountains.dat")
-# mp.read_file("./spec/map_spec_data")
+map = Map.new
+map.read_file("./data/Colorado_480x480.dat")
+# map.read_file("./data/testMountains.dat")
+# map.read_file("./spec/map_spec_data")
+
+route = Array.new
+rp = RoutePicker.new(map, [2,1])
+route = rp.calculate_route
 
 
-	rp = RoutePicker.new(mp, [2,1])
-
-
-# ib = ImageBuilder.new(mp)
-# ib.build_image
-# ib.save_image("img/test.png")
+ib = ImageBuilder.new(map)
+ib.draw_map
+ib.draw_route(route)
+ib.save_image("img/test.png")
 
 
 

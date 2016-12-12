@@ -5,23 +5,21 @@ class RoutePicker
 		@map = map
 		@route = Hash.new
 		@path = Array.new
-		p @path = pick_route(init_loc)
+		@init_loc = init_loc
 	end
 
-	# create the route from left to right. coordinates in [y, x] format.
-	def pick_route(init_loc)
-		cl = init_loc
-
-		path = Array.new
-		path << cl
+	# create the route from left to right. coordinates in [y, x] format. map starts left top.
+	def calculate_route
+		cl = @init_loc
+		@path << cl
 
 		while not at_right_side?(cl)
-			cl = next_step(cl)
-			path << cl
+			p cl = next_step(cl)
+			@path << cl
 			p "---------"
 		end 
 
-		return path		
+		return @path
 	end
 
 
@@ -44,7 +42,15 @@ class RoutePicker
 
 	# return the coordinates of the optimal next step 
 	def next_step(cl)
-		next_step = [ delta_right_top(cl), delta_right_mid(cl), delta_right_bot(cl) ].min_by { |i| i[1].abs }
+		# its possible to move one coord higher in y direction, otherwise give a very large number that will never be chosen
+		cl[0] > 1 ? drt = delta_right_top(cl) : drt = 99999999999
+		# its possible to move one coord to the right in x direction, otherwise give a very large number that will never be chosen		
+		cl[1] > @map.nr_columns ? drm = delta_right_mid(cl) : drm = 99999999999
+		# its possible to move one coord lower in y direction, otherwise give a very large number that will never be chosen
+		cl[0] < @map.nr_rows ? drb = delta_right_bot(cl) : drb = 99999999999
+
+		# choose the next step based on the lowest absolute delta
+		next_step = [ drt, drm, drb ].min_by { |i| i[1].abs }
 
 		case next_step[0]
 		when :rt
