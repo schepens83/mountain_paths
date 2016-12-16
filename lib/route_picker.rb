@@ -1,24 +1,26 @@
 # Chooses the optimal route on the map, from left to right.
 class RoutePicker	
+	attr_reader :route, :tot_elavation
 
 	def initialize(map, init_loc)
 		@map = map
-		@route = Hash.new
-		@path = Array.new
+		# @route = Hash.new
+		@route = Array.new
 		@init_loc = init_loc
+		@tot_elavation = 0
 	end
 
 	# create the route from left to right. coordinates in [y, x] format. map starts left top.
 	def calculate_route
 		cl = @init_loc
-		@path << cl
+		@route << cl
 
 		while not at_right_side?(cl)
 			cl = next_step(cl)
-			@path << cl
+			@route << cl
 		end 
 
-		return @path
+		
 	end
 
 
@@ -48,6 +50,9 @@ class RoutePicker
 
 		# choose the next step based on the lowest absolute delta
 		next_step = [ drt, delta_right_mid(cl), drb ].min_by { |i| i[1].abs }
+
+		# increase tot_elavation with the delta between current and next step
+		@tot_elavation += next_step[1].abs
 
 		case next_step[0]
 		when :rt
