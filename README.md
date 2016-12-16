@@ -8,3 +8,5 @@ Problem decomposition:
 - algorithm to find best path
 - Visualize path (output graph to picture file)
 	- chunky_png -> works
+	- use feh with flag -D 0.1 (e.g.) (http://askubuntu.com/questions/237310/what-fast-image-viewers-are-available-for-ubuntu)
+	-raspbian OSx?
