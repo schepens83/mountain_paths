@@ -13,8 +13,8 @@ route_pickers = Array.new
 ib = ImageBuilder.new(map)
 ib.draw_map
 
-for e in (479).downto(1)
-# (1..480).step(15).to_a.each do |e|  
+
+(1..480).step(2).to_a.each do |e|  
 	rp = RoutePicker.new(map, [e,1])
 	rp.calculate_route
 	route_pickers << rp
@@ -30,10 +30,7 @@ for e in (479).downto(1)
 
 end
 
-route_pickers.each { |rp| puts rp.tot_elavation }
-p best_route = route_pickers.min_by { |rp| rp.tot_elavation }
-p best_route.tot_elavation
-
+best_route = route_pickers.min_by { |rp| rp.tot_elavation }
 
 route_pickers.each do |rp|
 	ib.draw_route(rp.route)

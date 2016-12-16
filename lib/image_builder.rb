@@ -25,9 +25,12 @@ class ImageBuilder
 		@map.nr_rows.times do |row|
 			@map.nr_columns.times do |col|
 				teint = (normalize( @map.min_height, @map.max_height, @map.grid[[ row + 1,col + 1 ]].to_f ) * 255).to_i
-				# chunckyPNG uses x,y coordinates, instead of the y,x coordinates in this program
-				@image[ col,row ] = ChunkyPNG::Color.grayscale(teint)
-				((teint.to_f / 255) * 100).to_i
+
+				# chunckyPNG uses x,y coordinates, instead of the y,x coordinates in this program -> [ col, row ]
+				color1 = ChunkyPNG::Color.rgb(255,255,255) #white
+				color2 = ChunkyPNG::Color.rgb(0,0,0) #black
+				@image[ col,row ] = ChunkyPNG::Color.interpolate_quick(color1,color2 , teint)
+
 			end
 		end
 	end
