@@ -1,7 +1,19 @@
 require 'chunky_png'
 
+# Representation of a color
+class RgbColor
+	attr_reader :r, :g, :b
+
+	def initialize(r, g, b)
+		@r = r
+		@g = g
+		@b = b
+	end  
+end
+
 # Creates the png image of the map
 class ImageBuilder
+	COLOR = RgbColor.new(255, 0, 0)
 
 	def initialize(map)
 		@map = map
@@ -21,20 +33,20 @@ class ImageBuilder
 	end
 
 	# yield after each pixel is drawn. e.g. to save the image
-	def draw_route_per_each_pixel(route)
+	def draw_route_per_each_pixel(route, color = COLOR)
 		route.length.times do
 			pixel = route.shift
-			draw_route([pixel])
+			draw_route([pixel], color)
 			yield
 		end
 	end
 
 	# draw the route on @image.
-	def draw_route(route)
+	def draw_route(route, color = COLOR)
 		route.each do |e|  
 			col = e[1]
 			row = e[0]
-			@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(255, 0, 0, 128)
+			@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(color.r, color.g, color.b, 128)
 		end
 	end
 
@@ -52,3 +64,4 @@ class ImageBuilder
 	end
 
 end
+

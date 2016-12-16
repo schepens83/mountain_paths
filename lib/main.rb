@@ -25,7 +25,7 @@ route = Array.new
 	# 	print "#{i.to_s.rjust(4, "0")}\r"
 	# end
 
-	ib.draw_route(route) 
+	ib.draw_route(route, RgbColor.new(100, 0, 0)) 
 	ib.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
 
 # end
