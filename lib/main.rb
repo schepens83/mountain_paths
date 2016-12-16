@@ -8,15 +8,16 @@ map.read_file("./data/Colorado_480x480.dat")
 # map.read_file("./data/testMountains.dat")
 # map.read_file("./spec/map_spec_data")
 
-route = Array.new
-# (1..480).step(15).to_a.each do |e|  
-	rp = RoutePicker.new(map, [200,1])
-	rp.calculate_route
-	route = rp.route
-	p elavation = rp.tot_elavation
 
-	ib = ImageBuilder.new(map)
-	ib.draw_map
+route_pickers = Array.new
+ib = ImageBuilder.new(map)
+ib.draw_map
+
+for e in (479).downto(1)
+# (1..480).step(15).to_a.each do |e|  
+	rp = RoutePicker.new(map, [e,1])
+	rp.calculate_route
+	route_pickers << rp
 
 	# i = 1
 	# ib.draw_route_per_each_pixel(route) do 
@@ -25,10 +26,22 @@ route = Array.new
 	# 	print "#{i.to_s.rjust(4, "0")}\r"
 	# end
 
-	ib.draw_route(route, RgbColor.new(100, 0, 0)) 
-	ib.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
 
-# end
+
+end
+
+route_pickers.each { |rp| puts rp.tot_elavation }
+p best_route = route_pickers.min_by { |rp| rp.tot_elavation }
+p best_route.tot_elavation
+
+
+route_pickers.each do |rp|
+	ib.draw_route(rp.route)
+end
+
+ib.draw_route(best_route.route, RgbColor.new(34,139,34))
+
+ib.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
 
 # slideshow_transcoder = FFMPEG::Transcoder.new(
 #   '',
