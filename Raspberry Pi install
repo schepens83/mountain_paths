@@ -4,6 +4,9 @@ Raspberry Pi install:
 sudo apt-get update
 sudo apt-get upgrade
 
+# Install x window for remote acces to screen.
+sudo apt-get install x11vnc
+
 # Install crontab
 sudo apt-get install cron
 
@@ -16,3 +19,12 @@ mkdir apps && cd apps
 git clone git@github.com:schepens83/mountain_paths.git
 
 
+
+
+feh -FZY -D0.01 ~/Pictures/
+sudo apt-get x11vnc
+sudo apt-get install x11vnc
+echo "set password for the x11vnc server. used later to log in visually from mac (cmd: open vnc://pi@ip-addres"
+x11vnc -storepasswd
+
+x11vnc -usepw -display :0
