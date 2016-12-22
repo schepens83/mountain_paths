@@ -49,5 +49,6 @@ def draw_route_per_pixel(map)
 
 end
 
-draw_route_per_pixel(map)
+# draw_route_per_pixel(map)
+draw_all_routes_and_best(map)
 
