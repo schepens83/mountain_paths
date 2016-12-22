@@ -15,12 +15,10 @@ class RoutePicker
 		cl = init_loc
 		@route << cl
 
-		while not at_right_side?(cl)
+		while not at_rightmost_side?(cl)
 			cl = next_step(cl)
 			@route << cl
-		end 
-
-		
+		end 		
 	end
 
 
@@ -49,44 +47,37 @@ class RoutePicker
 		# increase tot_elavation with the delta between current and next step
 		@tot_elavation += next_step[1].abs
 
-		case next_step[0]
-		when :rt
-			return right_top(cl)
-		when :rm
-			return right_mid(cl)
-		when :rb
-			return right_bot(cl)
-		end 
+		return next_step[0]
 	end
 
 	# calculates the delta between current location (cl) and it's right top location. cl is the current location
 	def delta_right_top(cl)
 		if cl[0] > 1 
-			[:rt, @map.grid[cl] - @map.grid[ right_top(cl) ]]
+			[right_top(cl), @map.grid[cl] - @map.grid[ right_top(cl) ]]
 		else
 			# give a very large number that will never be chosen
-			[:rt, 99999999999]
+			[right_top(cl), 99999999999]
 		end
 	end
 
 	# calculates the delta between current location (cl) and it's right mid location
 	def delta_right_mid(cl)
 		# cl is the current location
-		[:rm, @map.grid[cl] - @map.grid[ right_mid(cl) ]]
+		[right_mid(cl), @map.grid[cl] - @map.grid[ right_mid(cl) ]]
 	end
 
 	# calculates the delta between current location (cl) and it's right bottom location
 	def delta_right_bot(cl)
 		if cl[0] < @map.nr_rows 
 			# give a very large number that will never be chosen
-			[:rb, @map.grid[cl] - @map.grid[ right_bot(cl) ]]
+			[right_bot(cl), @map.grid[cl] - @map.grid[ right_bot(cl) ]]
 		else 
-			[:rb, 99999999999]
+			[right_bot(cl), 99999999999]
 		end			
 	end	
 
 	# returns true if the rightermost column has been reached. false otherwise.
-	def at_right_side?(cl)
+	def at_rightmost_side?(cl)
 		cl[1] == @map.nr_columns
 	end
 
