@@ -43,13 +43,8 @@ class RoutePicker
 
 	# return the coordinates of the optimal next step 
 	def next_step(cl)
-		# its possible to move one coord higher in y direction, otherwise give a very large number that will never be chosen
-		cl[0] > 1 ? drt = delta_right_top(cl) : drt = [:rt, 99999999999]
-		# its possible to move one coord lower in y direction, otherwise give a very large number that will never be chosen
-		cl[0] < @map.nr_rows ? drb = delta_right_bot(cl) : drb = [:rb, 99999999999]
-
 		# choose the next step based on the lowest absolute delta
-		next_step = [ drt, delta_right_mid(cl), drb ].min_by { |i| i[1].abs }
+		next_step = [ delta_right_top(cl), delta_right_mid(cl), delta_right_bot(cl) ].min_by { |i| i[1].abs }
 
 		# increase tot_elavation with the delta between current and next step
 		@tot_elavation += next_step[1].abs
@@ -64,10 +59,14 @@ class RoutePicker
 		end 
 	end
 
-	# calculates the delta between current location (cl) and it's right top location
+	# calculates the delta between current location (cl) and it's right top location. cl is the current location
 	def delta_right_top(cl)
-		# cl is the current location
-		[:rt, @map.grid[cl] - @map.grid[ right_top(cl) ]]
+		if cl[0] > 1 
+			[:rt, @map.grid[cl] - @map.grid[ right_top(cl) ]]
+		else
+			# give a very large number that will never be chosen
+			[:rt, 99999999999]
+		end
 	end
 
 	# calculates the delta between current location (cl) and it's right mid location
@@ -78,8 +77,12 @@ class RoutePicker
 
 	# calculates the delta between current location (cl) and it's right bottom location
 	def delta_right_bot(cl)
-		# cl is the current location
-		[:rb, @map.grid[cl] - @map.grid[ right_bot(cl) ]]
+		if cl[0] < @map.nr_rows 
+			# give a very large number that will never be chosen
+			[:rb, @map.grid[cl] - @map.grid[ right_bot(cl) ]]
+		else 
+			[:rb, 99999999999]
+		end			
 	end	
 
 	# returns true if the rightermost column has been reached. false otherwise.
