@@ -1,7 +1,7 @@
 require_relative "map"
 require_relative "image_builder"
 require_relative "route_picker"
-# require 'streamio-ffmpeg'
+
 
 map = Map.new
 map.read_file("./data/Colorado_480x480.dat")
@@ -17,13 +17,6 @@ def draw_all_routes_and_best(map)
 		rp = RoutePicker.new(map, [e,1])
 		rp.calculate_route
 		route_pickers << rp
-
-	# i = 1
-	# ib.draw_route_per_each_pixel(route) do 
-	# 	ib.save_image("img/Colorado_#{i.to_s.rjust(4, "0")}.png")
-	# 	i += 1
-	# 	print "#{i.to_s.rjust(4, "0")}\r"
-	# end
 	end
 
 	best_route = route_pickers.min_by { |rp| rp.tot_elavation }
