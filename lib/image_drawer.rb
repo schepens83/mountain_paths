@@ -1,4 +1,4 @@
-require 'chunky_png'
+	require 'chunky_png'
 
 # Representation of a color
 class RgbColor
@@ -13,7 +13,7 @@ class RgbColor
 end
 
 # Creates the png image of the map
-class ImageBuilder
+class ImageDrawer
 	COLOR = RgbColor.new(r: 255, g: 0, b: 0)
 
 	def initialize(args)
