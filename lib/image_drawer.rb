@@ -44,7 +44,7 @@ class ImageDrawer
 	def draw_routes_per_column(routes, color = COLOR)
 		(1..map.nr_columns).to_a.each do |col|  
 			routes.each do |route| 
-				route.route.each do |step|  
+				route.steps.each do |step|  
 					draw_step(step) if step[1] == col
 				end
 			end
@@ -59,7 +59,7 @@ class ImageDrawer
 	
 	# draw a route on @map, but yields after each pixel is drawn. e.g. to save the image
 	def draw_route_per_step(route, color = COLOR)
-		route.route.each do |step|   
+		route.steps.each do |step|   
 			draw_step(step, color)
 			yield
 		end
@@ -67,7 +67,7 @@ class ImageDrawer
 
 	# draw the route on @image.
 	def draw_route(route, color = COLOR)
-		route.route.each do |step|  
+		route.steps.each do |step|  
 			draw_step(step, color)			
 		end
 	end

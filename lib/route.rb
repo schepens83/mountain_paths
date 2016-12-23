@@ -1,12 +1,12 @@
-# Chooses the optimal route on the map, from left to right.
+# Chooses the optimal steps on the map, from left to right.
 class Route
-	attr_reader :route, :tot_elavation, :init_loc, :cl
+	attr_reader :steps, :tot_elavation, :init_loc, :cl
 
 	def initialize(args)
 		args = defaults.merge(args)
 
 		@map = args[:map]; raise "No map argument (map is nil)" if @map == nil
-		@route = Array.new
+		@steps = Array.new
 		@init_loc = args[:init_loc]
 		@tot_elavation = 0
 		calculate_route
@@ -19,14 +19,14 @@ class Route
 
 	private
 
-	# create the route from left to right. coordinates in [y, x] format. map starts left top.
+	# create the steps from left to right. coordinates in [y, x] format. map starts left top.
 	def calculate_route
 		@cl = init_loc
-		@route << cl
+		@steps << cl
 
 		while not at_rightmost_side?
 			@cl = next_step
-			@route << cl
+			@steps << cl
 		end 		
 	end
 
