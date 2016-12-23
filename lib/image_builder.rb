@@ -4,19 +4,20 @@ require 'chunky_png'
 class RgbColor
 	attr_reader :r, :g, :b
 
-	def initialize(r, g, b)
-		@r = r
-		@g = g
-		@b = b
+	def initialize(args)
+		@r = args[:r] || 255
+		@g = args[:g] || 0
+		@b = args[:b] || 0
 	end  
+
 end
 
 # Creates the png image of the map
 class ImageBuilder
-	COLOR = RgbColor.new(255, 0, 0)
+	COLOR = RgbColor.new(r: 255, g: 0, b: 0)
 
-	def initialize(map)
-		@map = map
+	def initialize(args)
+		@map = args[:map]; raise "No map argument (map is nil)" if @map == nil
 		@image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
 	end
 
@@ -27,8 +28,8 @@ class ImageBuilder
 				teint = (normalize( @map.min_height, @map.max_height, @map.grid[[ row + 1,col + 1 ]].to_f ) * 255).to_i
 
 				# chunckyPNG uses x,y coordinates, instead of the y,x coordinates in this program -> [ col, row ]
-				color1 = ChunkyPNG::Color.rgb(255,255,255) #white
-				color2 = ChunkyPNG::Color.rgb(0,0,0) #black
+				color1 = ChunkyPNG::Color.rgb(255, 255, 255) #white
+				color2 = ChunkyPNG::Color.rgb(0, 0, 0) #black
 				@image[ col,row ] = ChunkyPNG::Color.interpolate_quick(color1,color2 , teint)
 
 			end

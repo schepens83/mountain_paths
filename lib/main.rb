@@ -10,11 +10,11 @@ map.read_file("./data/Colorado_480x480.dat")
 
 def draw_all_routes_and_best(map)
 	route_pickers = Array.new
-	ib = ImageBuilder.new(map)
+	ib = ImageBuilder.new(map: map)
 	ib.draw_map
 
 	(1..480).step(2).to_a.each do |e|  
-		rp = RoutePicker.new(map, [e,1])
+		rp = RoutePicker.new(map: map, init_loc: [e,1])
 		rp.calculate_route
 		route_pickers << rp
 	end
@@ -25,7 +25,7 @@ def draw_all_routes_and_best(map)
 		ib.draw_route(rp.route)
 	end
 
-	ib.draw_route(best_route.route, RgbColor.new(34,139,34))
+	ib.draw_route(best_route.route, RgbColor.new(r: 34, g: 139, b: 34))
 
 	ib.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
 
@@ -33,10 +33,10 @@ end
 
 def draw_route_per_pixel(map)
 	route_pickers = Array.new
-	ib = ImageBuilder.new(map)
+	ib = ImageBuilder.new(map: map)
 	ib.draw_map
 
-	rp = RoutePicker.new(map, [10,1])
+	rp = RoutePicker.new(map: map, init_loc: [10,1])
 	rp.calculate_route
 	route = rp.route
 

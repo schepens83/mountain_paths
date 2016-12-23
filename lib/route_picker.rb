@@ -2,12 +2,17 @@
 class RoutePicker	
 	attr_reader :route, :tot_elavation, :init_loc, :cl
 
-	def initialize(map, init_loc)
-		@map = map
-		# @route = Hash.new
+	def initialize(args)
+		args = defaults.merge(args)
+
+		@map = args[:map]; raise "No map argument (map is nil)" if @map == nil
 		@route = Array.new
-		@init_loc = init_loc
+		@init_loc = args[:init_loc]
 		@tot_elavation = 0
+	end
+
+	def defaults
+		{ init_loc: [1,1] }
 	end
 
 	# create the route from left to right. coordinates in [y, x] format. map starts left top.
