@@ -55,10 +55,9 @@ def draw_all_routes_per_col(map)
 		print "#{i.to_s.rjust(4, "0")}\r"
 	end
 end
-# draw_route_per_pixel(map)
 
 Profiler::profile do
-	draw_all_routes_and_best(map)
+	draw_route_per_pixel(map)
+	# draw_all_routes_and_best(map)
+	# draw_all_routes_per_col(map)
 end
-
-# draw_all_routes_per_col(map)
