@@ -1,5 +1,5 @@
 # Chooses the optimal route on the map, from left to right.
-class RoutePicker	
+class Route
 	attr_reader :route, :tot_elavation, :init_loc, :cl
 
 	def initialize(args)
@@ -9,11 +9,15 @@ class RoutePicker
 		@route = Array.new
 		@init_loc = args[:init_loc]
 		@tot_elavation = 0
+		calculate_route
 	end
 
 	def defaults
 		{ init_loc: [1,1] }
 	end
+
+
+	private
 
 	# create the route from left to right. coordinates in [y, x] format. map starts left top.
 	def calculate_route
@@ -25,9 +29,6 @@ class RoutePicker
 			@route << cl
 		end 		
 	end
-
-
-	private
 
 	# returns right top coordinates
 	def right_top
