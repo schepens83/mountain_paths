@@ -68,6 +68,7 @@ class ImageDrawer
 
 	private
 
+	# draw an individual step of a route on the map
 	def draw_step(step, color = COLOR)
 		col = step[1]
 		row = step[0]
@@ -79,12 +80,13 @@ class ImageDrawer
 		(val - min) / (max - min)
 	end
 
+	# draw an individual pixel of the map in greyscale
 	def draw_greyscale_pixel(col,row, teint)
 		@image[ col,row ] = ChunkyPNG::Color.grayscale(teint)		
 	end
 
+	# draw an individual pixel of the map in interpreted color (between 2 colors)
 	def draw_color_interpolated_pixel(col,row, teint)
 		@image[ col,row ] = ChunkyPNG::Color.interpolate_quick(from_color, to_color, teint)
 	end
 end
-
