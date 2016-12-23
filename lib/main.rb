@@ -21,9 +21,11 @@ def draw_all_routes_and_best(map)
 
 	best_route = route_pickers.min_by { |rp| rp.tot_elavation }
 
+	routes = Array.new
 	route_pickers.each do |rp|
-		id.draw_route(rp.route)
+		routes << rp.route
 	end
+	id.draw_routes(routes)
 
 	id.draw_route(best_route.route, RgbColor.new(r: 34, g: 139, b: 34))
 

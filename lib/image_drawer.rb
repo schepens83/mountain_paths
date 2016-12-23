@@ -45,6 +45,11 @@ class ImageDrawer
 		end
 	end
 
+	# draws all the routes that are given to it.
+	def draw_routes(routes, color = COLOR)
+		routes.each { |r| draw_route(r, color) }
+	end
+
 	# draw the route on @image.
 	def draw_route(route, color = COLOR)
 		route.each do |e|  
