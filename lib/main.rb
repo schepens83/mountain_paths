@@ -1,7 +1,8 @@
+require "ruby-prof"
 require_relative "map"
 require_relative "image_drawer"
 require_relative "route"
-require "ruby-prof"
+require_relative "route_evaluator"
 require_relative "Profiler"
 
 map = Map.new
@@ -10,20 +11,16 @@ map.read_file("./data/Colorado_480x480.dat")
 # map.read_file("./spec/map_spec_data")
 
 def draw_all_routes_and_best(map)
-	routes = Array.new
+	# routes = Array.new
 	id = ImageDrawer.new(map: map)
 	id.draw_map
 
-	(1..480).step(2).to_a.each do |e|  
-		route = Route.new(map: map, init_loc: [e,1])
-		routes << route
-	end
+	re = RouteEvaluator.new(map: map)
+	re.create_all_routes
+	
+	id.draw_routes(re.routes)
 
-	best_route = routes.min_by { |route| route.tot_elavation }
-
-	id.draw_routes(routes)
-
-	id.draw_route(best_route, RgbColor.new(r: 34, g: 139, b: 34))
+	id.draw_route(re.best_route, RgbColor.new(r: 34, g: 139, b: 34))
 
 	id.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
 
@@ -46,8 +43,6 @@ def draw_route_per_pixel(map)
 end
 
 # draw_route_per_pixel(map)
-
-
 
 Profiler::profile do
 	draw_all_routes_and_best(map)
