@@ -14,11 +14,14 @@ end
 
 # Creates the png image of the map
 class ImageDrawer
+	attr_reader :from_color, :to_color
 	COLOR = RgbColor.new(r: 255, g: 0, b: 0)
 
 	def initialize(args)
 		@map = args[:map]; raise "No map argument (map is nil)" if @map == nil
 		@image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
+		@from_color = args[:from_color] || nil
+		@to_color = args[:to_color] || nil
 	end
 
 	# draw the map on @image.
@@ -28,10 +31,11 @@ class ImageDrawer
 				teint = (normalize( @map.min_height, @map.max_height, @map.grid[[ row + 1,col + 1 ]].to_f ) * 255).to_i
 
 				# chunckyPNG uses x,y coordinates, instead of the y,x coordinates in this program -> [ col, row ]
-				# color1 = ChunkyPNG::Color.rgb(255, 255, 255) #white
-				# color2 = ChunkyPNG::Color.rgb(0, 0, 0) #black
-				# @image[ col,row ] = ChunkyPNG::Color.interpolate_quick(color1,color2 , teint)
-				@image[ col,row ] = ChunkyPNG::Color.grayscale(teint)
+				if from_color == nil || to_color == nil
+					draw_greyscale_pixel(col,row, teint)
+				else
+					draw_color_interpolated_pixel(col, row, teint)
+				end
 			end
 		end
 	end
@@ -56,12 +60,6 @@ class ImageDrawer
 		end
 	end
 
-	def draw_step(step, color = COLOR)
-		col = step[1]
-		row = step[0]
-		@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(color.r, color.g, color.b, 128)		
-	end
-
 	# save the image to filename location.
 	def save_image(filename)
 		@image.save(filename, :interlace => true)		
@@ -70,10 +68,23 @@ class ImageDrawer
 
 	private
 
+	def draw_step(step, color = COLOR)
+		col = step[1]
+		row = step[0]
+		@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(color.r, color.g, color.b, 128)		
+	end
+
 	# normalize value between 0 and 1
 	def normalize(min, max, val)
 		(val - min) / (max - min)
 	end
 
+	def draw_greyscale_pixel(col,row, teint)
+		@image[ col,row ] = ChunkyPNG::Color.grayscale(teint)		
+	end
+
+	def draw_color_interpolated_pixel(col,row, teint)
+		@image[ col,row ] = ChunkyPNG::Color.interpolate_quick(from_color, to_color, teint)
+	end
 end
 
