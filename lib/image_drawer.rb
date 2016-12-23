@@ -14,7 +14,7 @@ end
 
 # Creates the png image of the map
 class ImageDrawer
-	attr_reader :from_color, :to_color
+	attr_reader :from_color, :to_color, :map
 	COLOR = RgbColor.new(r: 255, g: 0, b: 0)
 
 	def initialize(args)
@@ -40,17 +40,29 @@ class ImageDrawer
 		end
 	end
 
-	# yield after each pixel is drawn. e.g. to save the image
+	# draws all the routes on @image column by column. Yields after every column
+	def draw_routes_per_column(routes, color = COLOR)
+		(1..map.nr_columns).to_a.each do |col|  
+			routes.each do |route| 
+				route.route.each do |step|  
+					draw_step(step) if step[1] == col
+				end
+			end
+			yield
+		end
+	end
+
+	# draws all the routes on @image
+	def draw_routes(routes, color = COLOR)
+		routes.each { |r| draw_route(r, color) }
+	end
+	
+	# draw a route on @map, but yields after each pixel is drawn. e.g. to save the image
 	def draw_route_per_step(route, color = COLOR)
 		route.route.each do |step|   
 			draw_step(step, color)
 			yield
 		end
-	end
-
-	# draws all the routes that are given to it.
-	def draw_routes(routes, color = COLOR)
-		routes.each { |r| draw_route(r, color) }
 	end
 
 	# draw the route on @image.

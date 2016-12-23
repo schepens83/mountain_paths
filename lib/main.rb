@@ -11,7 +11,6 @@ map.read_file("./data/Colorado_480x480.dat")
 # map.read_file("./spec/map_spec_data")
 
 def draw_all_routes_and_best(map)
-	# routes = Array.new
 	id = ImageDrawer.new(map: map)
 	id.draw_map
 
@@ -42,8 +41,24 @@ def draw_route_per_pixel(map)
 
 end
 
+def draw_all_routes_per_col(map)
+	id = ImageDrawer.new(map: map)
+	id.draw_map
+
+	re = RouteEvaluator.new(map: map)
+	re.create_all_routes
+	
+	i = 1
+	id.draw_routes_per_column(re.routes) do
+		id.save_image("img/Colorado_#{i.to_s.rjust(4, "0")}.png")		
+		i += 1
+		print "#{i.to_s.rjust(4, "0")}\r"
+	end
+end
 # draw_route_per_pixel(map)
 
-Profiler::profile do
-	draw_all_routes_and_best(map)
-end
+# Profiler::profile do
+# 	draw_all_routes_and_best(map)
+# end
+
+draw_all_routes_per_col(map)
