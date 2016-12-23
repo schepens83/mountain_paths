@@ -1,4 +1,4 @@
-	require 'chunky_png'
+require 'chunky_png'
 
 # Representation of a color
 class RgbColor
