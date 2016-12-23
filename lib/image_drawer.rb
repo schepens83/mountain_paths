@@ -37,10 +37,9 @@ class ImageDrawer
 	end
 
 	# yield after each pixel is drawn. e.g. to save the image
-	def draw_route_per_each_pixel(route, color = COLOR)
-		route.length.times do
-			pixel = route.shift
-			draw_route([pixel], color)
+	def draw_route_per_step(route, color = COLOR)
+		route.route.each do |step|   
+			draw_step(step, color)
 			yield
 		end
 	end
@@ -52,11 +51,15 @@ class ImageDrawer
 
 	# draw the route on @image.
 	def draw_route(route, color = COLOR)
-		route.each do |e|  
-			col = e[1]
-			row = e[0]
-			@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(color.r, color.g, color.b, 128)
+		route.route.each do |step|  
+			draw_step(step, color)			
 		end
+	end
+
+	def draw_step(step, color = COLOR)
+		col = step[1]
+		row = step[0]
+		@image[ col-1 , row-1 ] = ChunkyPNG::Color.rgba(color.r, color.g, color.b, 128)		
 	end
 
 	# save the image to filename location.
