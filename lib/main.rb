@@ -7,7 +7,8 @@ require_relative "Profiler"
 
 map = Map.new
 # map.read_file("./data/Colorado_480x480.dat")
-map.read_file("./data/etopo1_bedrock.asc")
+# map.read_file("./data/etopo1_bedrock.asc")
+map.read_file("./data/us-west-coast")
 # map.read_file("./data/testMountains.dat")
 # map.read_file("./spec/map_spec_data")
 
@@ -23,7 +24,6 @@ def draw_all_routes_and_best(map)
 	id.draw_route(re.best_route, RgbColor.new(r: 34, g: 139, b: 34))
 
 	id.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
-
 end
 
 def draw_route_per_pixel(map)
@@ -39,7 +39,6 @@ def draw_route_per_pixel(map)
 		i += 1
 		print "#{i.to_s.rjust(4, "0")}\r"
 	end
-
 end
 
 def draw_all_routes_per_col(map)
@@ -59,6 +58,6 @@ end
 
 # Profiler::profile do
 	# draw_route_per_pixel(map)
-	draw_all_routes_and_best(map)
-	# draw_all_routes_per_col(map)
+	# draw_all_routes_and_best(map)
+	draw_all_routes_per_col(map)
 # end

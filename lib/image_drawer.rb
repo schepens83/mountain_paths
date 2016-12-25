@@ -15,7 +15,7 @@ end
 # Creates the png image of the map
 class ImageDrawer
 	attr_reader :from_color, :to_color, :map
-	COLOR = RgbColor.new(r: 255, g: 0, b: 0)
+	COLOR = RgbColor.new(r: 255, g: 1, b: 20)
 
 	def initialize(args)
 		@map = args[:map]; raise "No map argument (map is nil)" if @map == nil

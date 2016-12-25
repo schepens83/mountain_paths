@@ -62,7 +62,7 @@ class Map
 	end
 
 	def only_numbers?(str)
-		str.split(" ").all? { |val| val !~ /\D/ }
+		str.split(" ").all? { |val| val =~ /-{0,1}\d/ }
 	end
 
 	def spaces_between_values?(str)
