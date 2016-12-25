@@ -6,7 +6,8 @@ require_relative "route_evaluator"
 require_relative "Profiler"
 
 map = Map.new
-map.read_file("./data/Colorado_480x480.dat")
+# map.read_file("./data/Colorado_480x480.dat")
+map.read_file("./data/etopo1_bedrock.asc")
 # map.read_file("./data/testMountains.dat")
 # map.read_file("./spec/map_spec_data")
 
@@ -56,8 +57,8 @@ def draw_all_routes_per_col(map)
 	end
 end
 
-Profiler::profile do
-	draw_route_per_pixel(map)
-	# draw_all_routes_and_best(map)
+# Profiler::profile do
+	# draw_route_per_pixel(map)
+	draw_all_routes_and_best(map)
 	# draw_all_routes_per_col(map)
-end
+# end

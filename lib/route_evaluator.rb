@@ -7,7 +7,7 @@ class RouteEvaluator
 	end
 
 	def create_all_routes
-		(1..map.nr_columns).step(1).to_a.each do |e|  
+		(1..map.nr_rows).step(1).to_a.each do |e|  
 			route = Route.new(map: map, init_loc: [e,1])
 			@routes << route
 		end
