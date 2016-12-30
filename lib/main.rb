@@ -1,9 +1,10 @@
 # require "ruby-prof"
+# require_relative "Profiler"
 require_relative "map"
 require_relative "image_drawer"
 require_relative "route"
 require_relative "route_evaluator"
-require_relative "Profiler"
+
 
 # map = Map.new(path: "./data/Colorado_480x480.dat")
 # map = Map.new(path: "./data/etopo1_bedrock.asc")
