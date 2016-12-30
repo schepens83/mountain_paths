@@ -14,7 +14,11 @@ Problem decomposition:
 	- use feh with flag -D 0.1 (e.g.) (http://askubuntu.com/questions/237310/what-fast-image-viewers-are-available-for-ubuntu)
 
 todo:
+- resize data files to accomodate for the rasp pi touchscreen resolution (800x480)
+- install ruby and git on the rasp pi and git clone this project there
+- create some script to take a random new map and create the images for that and show it using feh. Use crontab to schedule
+- auto start feh on startup
+- create a case for the rasp pi and touchscreen to place it on the wall.
 - better algorithm that finds a more optimum route 
 	- looking further forward
 	- working backward from right to left
-- create some script to take a random new map and create the images for that and show it using feh. Use crontab to schedule
