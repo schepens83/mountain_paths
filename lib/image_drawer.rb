@@ -22,6 +22,7 @@ class ImageDrawer
 		@image = ChunkyPNG::Image.new(@map.nr_columns, @map.nr_rows, ChunkyPNG::Color::TRANSPARENT)
 		@from_color = args[:from_color] || nil
 		@to_color = args[:to_color] || nil
+		
 	end
 
 	# draw the map on @image.

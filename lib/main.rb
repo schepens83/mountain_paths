@@ -5,12 +5,11 @@ require_relative "route"
 require_relative "route_evaluator"
 require_relative "Profiler"
 
-map = Map.new
-# map.read_file("./data/Colorado_480x480.dat")
-# map.read_file("./data/etopo1_bedrock.asc")
-map.read_file("./data/us-west-coast")
-# map.read_file("./data/testMountains.dat")
-# map.read_file("./spec/map_spec_data")
+# map = Map.new(path: "./data/Colorado_480x480.dat")
+# map = Map.new(path: "./data/etopo1_bedrock.asc")
+map = Map.new(path: "./data/us-west-coast", height: 480, width: 800)
+# map = Map.new(path: "./data/testMountains.dat")
+# map = Map.new(path: "./spec/map_spec_data")
 
 def draw_all_routes_and_best(map)
 	id = ImageDrawer.new(map: map)
