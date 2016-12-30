@@ -22,7 +22,7 @@ def draw_all_routes_and_best(map)
 
 	id.draw_route(re.best_route, RgbColor.new(r: 34, g: 139, b: 34))
 
-	id.save_image("img/Colorado_#{1.to_s.rjust(4, "0")}.png")
+	id.save_image("img/img_#{1.to_s.rjust(4, "0")}.png")
 end
 
 def draw_route_per_pixel(map)
@@ -34,7 +34,7 @@ def draw_route_per_pixel(map)
 
 	i = 1
 	id.draw_route_per_step(route) do 
-		id.save_image("img/Colorado_#{i.to_s.rjust(4, "0")}.png")
+		id.save_image("img/img_#{i.to_s.rjust(4, "0")}.png")
 		i += 1
 		print "#{i.to_s.rjust(4, "0")}\r"
 	end
@@ -49,7 +49,7 @@ def draw_all_routes_per_col(map)
 	
 	i = 1
 	id.draw_routes_per_column(re.routes) do
-		id.save_image("img/Colorado_#{i.to_s.rjust(4, "0")}.png")		
+		id.save_image("img/img_#{i.to_s.rjust(4, "0")}.png")		
 		i += 1
 		print "#{i.to_s.rjust(4, "0")}\r"
 	end
