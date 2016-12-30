@@ -1,4 +1,4 @@
-require "ruby-prof"
+# require "ruby-prof"
 require_relative "map"
 require_relative "image_drawer"
 require_relative "route"
