@@ -28,3 +28,6 @@ echo "set password for the x11vnc server. used later to log in visually from mac
 x11vnc -storepasswd
 
 x11vnc -usepw -display :0
+
+# display a folder on the touch screen.
+DISPLAY=:0.0 feh -FZzY -D5 ~/Pictures/pinterest/ &

@@ -12,3 +12,9 @@ Problem decomposition:
 - Visualize path (output graph to picture file)
 	- chunky_png -> works
 	- use feh with flag -D 0.1 (e.g.) (http://askubuntu.com/questions/237310/what-fast-image-viewers-are-available-for-ubuntu)
+
+todo:
+- better algorithm that finds a more optimum route 
+	- looking further forward
+	- working backward from right to left
+- create some script to take a random new map and create the images for that and show it using feh. Use crontab to schedule
